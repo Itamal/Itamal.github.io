@@ -31,57 +31,45 @@
 <div id="menu">
     <h1>Header 1</h1>
     <h2>Header 2</h2>
-    <h3>Header 3</h3>
-    <h4>Header 4</h4>
 </div>
 
   <script>
-    jQuery(document).ready(function () {
-    var map;
+  jQuery(document).ready(function () {
+      const style = [
+        { stylers: [{ saturation: "-100" }, { lightness: "20" }] },
+        { featureType: "poi", stylers: [{ visibility: "off" }] },
+        { featureType: "transit", stylers: [{ visibility: "off" }] },
+        { featureType: "road", stylers: [{ lightness: "50" }, { visibility: "on" }] },
+        { featureType: "landscape", stylers: [{ lightness: "50" }] }
+      ];
 
-    var style = [
-		{
-		stylers: [
-			{ saturation: "-100" },
-			{ lightness: "20" }
-		]
-		},{
-		featureType: "poi",
-		stylers: [
-			{ visibility: "off" }
-		]
-		},{
-		featureType: "transit",
-		stylers: [
-			{ visibility: "off" }
-		]
-		},{
-		featureType: "road",
-		stylers: [
-			{ lightness: "50" },
-			{ visibility: "on" }
-		]
-		},{
-		featureType: "landscape",
-		stylers: [
-			{ lightness: "50" }
-		]
-		}
-	]
+      let map;
+      const initMap = (lat, lng) => {
+        const location = new google.maps.LatLng(lat, lng);
+        map = new google.maps.Map($('#map')[0], {
+          zoom: 10,
+          center: location,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          disableDefaultUI: true,
+          styles: style
+        });
+      };
 
-    var options = {
-        zoom: 7,
-        center:  new google.maps.LatLng(45.50867, -73.553992),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        disableDefaultUI: true
-    };
-    
-    map = new google.maps.Map($('#map')[0], options);
-    map.setOptions({
-        styles: style
+      // Step 1: Show IP-based location immediately
+      $.get("https://ipapi.co/json/", function (data) {
+        initMap(data.latitude, data.longitude);
+      });
+
+      // Step 2: If allowed, override with precise browser-based location
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const userLat = position.coords.latitude;
+          const userLng = position.coords.longitude;
+          if (map) map.setCenter(new google.maps.LatLng(userLat, userLng));
+        });
+      }
     });
 
-});
   </script>
 </body>
 </html>
