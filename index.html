@@ -1,2 +1,87 @@
-Welcome to my web site!
-This is a short example, maybe something will go here soon
+
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSFiddle T2F5Z</title>
+
+  <style>
+    #map {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;    
+}
+
+#menu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+  </style>
+
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js"></script>
+</head>
+<body>
+  <div id="map"></div>
+<div id="menu">
+    <h1>Header 1</h1>
+    <h2>Header 2</h2>
+    <h3>Header 3</h3>
+    <h4>Header 4</h4>
+</div>
+
+  <script>
+    jQuery(document).ready(function () {
+    var map;
+
+    var style = [
+		{
+		stylers: [
+			{ saturation: "-100" },
+			{ lightness: "20" }
+		]
+		},{
+		featureType: "poi",
+		stylers: [
+			{ visibility: "off" }
+		]
+		},{
+		featureType: "transit",
+		stylers: [
+			{ visibility: "off" }
+		]
+		},{
+		featureType: "road",
+		stylers: [
+			{ lightness: "50" },
+			{ visibility: "on" }
+		]
+		},{
+		featureType: "landscape",
+		stylers: [
+			{ lightness: "50" }
+		]
+		}
+	]
+
+    var options = {
+        zoom: 7,
+        center:  new google.maps.LatLng(45.50867, -73.553992),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true
+    };
+    
+    map = new google.maps.Map($('#map')[0], options);
+    map.setOptions({
+        styles: style
+    });
+
+});
+  </script>
+</body>
+</html>
