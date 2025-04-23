@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>🚌🗺</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
   <style>
     #map {
@@ -22,6 +23,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 4rem;
+    color: #FFD700; /* magic yellow */
+    text-shadow: 
+      -2px -2px 0 #0055cc,
+      2px -2px 0 #0055cc,
+      -2px 2px 0 #0055cc,
+      2px 2px 0 #0055cc;
 }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -30,8 +39,8 @@
 <body>
   <div id="map"></div>
 <div id="menu">
-    <h1>Header 1</h1>
-    <h2>Header 2</h2>
+    <h1>Ready for a field trip?</h1>
+    <h2>Insert your location here </h2>
 </div>
 
   <script>
