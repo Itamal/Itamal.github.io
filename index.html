@@ -58,6 +58,7 @@
       // Step 1: Show IP-based location immediately
       $.get("https://ipapi.co/json/", function (data) {
         initMap(data.latitude, data.longitude);
+        console.log('focused around IP',data.latitude, data.longitude)
       });
 
       // Step 2: If allowed, override with precise browser-based location
@@ -65,6 +66,7 @@
         navigator.geolocation.getCurrentPosition(function (position) {
           const userLat = position.coords.latitude;
           const userLng = position.coords.longitude;
+          console.log('focused around location',data.latitude, data.longitude)
           if (map) map.setCenter(new google.maps.LatLng(userLat, userLng));
         });
       }
