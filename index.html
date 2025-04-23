@@ -67,7 +67,7 @@
         navigator.geolocation.getCurrentPosition(function (position) {
           const userLat = position.coords.latitude;
           const userLng = position.coords.longitude;
-          console.log('focused around location',data.latitude, data.longitude)
+          console.log('focused around location',userLat, userLng)
           if (map) map.setCenter(new google.maps.LatLng(userLat, userLng));
         });
       }
